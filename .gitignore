@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Raw / large data
+data/raw/
+
+# Local databases
+*.db
+*.sqbpro
+
+# Logs
+*.log
+
+# Database backups
+*.dump
+*.backup
