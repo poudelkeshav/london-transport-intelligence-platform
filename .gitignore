@@ -27,3 +27,5 @@ data/raw/
 # Database backups
 *.dump
 *.backup
+
+data/processed/station_footfall_clean.csv

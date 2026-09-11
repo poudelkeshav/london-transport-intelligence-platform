@@ -1,0 +1,22 @@
+Line,StatusSeverity,StatusDescription,Reason,CapturedAt,IsDisrupted
+Bakerloo,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Central,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Circle,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+District,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+DLR,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Elizabeth line,9,Minor Delays,Minor delays between Paddington and Heathrow Terminal 4 due to vandalism to railway equipment in the Paddington area. GOOD SERVICE on the rest of the line. ,2026-09-11 10:42:14.119402,1
+Hammersmith & City,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Jubilee,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Liberty,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Lioness,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Metropolitan,6,Severe Delays,Metropolitan Line: No service between Baker Street and Aldgate and SEVERE DELAYS between Harrow-on-the-Hill and Baker Street due to a collapsed drain on the track at Baker Street. GOOD SERVICE on the rest of the line. Tickets being accepted on London Buses and Chiltern railway services.  ,2026-09-11 10:42:14.119402,1
+Metropolitan,9,Minor Delays,Metropolitan Line: No service between Baker Street and Aldgate and SEVERE DELAYS between Harrow-on-the-Hill and Baker Street due to a collapsed drain on the track at Baker Street. GOOD SERVICE on the rest of the line. Tickets being accepted on London Buses and Chiltern railway services.  ,2026-09-11 10:42:14.119402,1
+Metropolitan,3,Part Suspended,Metropolitan Line: No service between Baker Street and Aldgate and SEVERE DELAYS between Harrow-on-the-Hill and Baker Street due to a collapsed drain on the track at Baker Street. GOOD SERVICE on the rest of the line. Tickets being accepted on London Buses and Chiltern railway services.  ,2026-09-11 10:42:14.119402,1
+Mildmay,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Northern,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Piccadilly,6,Severe Delays,"Piccadilly Line: Severe delays due to an earlier trespasser at Hammersmith. Tickets are being accepted on London Buses, Elizabeth line, Weaver line and Great Northern.  ",2026-09-11 10:42:14.119402,1
+Suffragette,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Victoria,9,Minor Delays,Victoria Line: Minor delays due to train cancellations.  ,2026-09-11 10:42:14.119402,1
+Waterloo & City,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Weaver,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
+Windrush,10,Good Service,No disruption reported,2026-09-11 10:42:14.119402,0
