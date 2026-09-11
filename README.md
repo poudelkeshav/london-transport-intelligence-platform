@@ -1,622 +1,400 @@
-\# 🚇 London Transport Intelligence Platform
+# 🚇 London Transport Intelligence Platform
 
+An end-to-end data analytics and machine learning platform for monitoring, analysing and forecasting public transport demand across London.
 
+The platform combines **live Transport for London (TfL) API data**, historical transport datasets, **PostgreSQL**, machine learning, **Power BI**, and an interactive **Streamlit application** to provide insights into passenger demand, station activity, network conditions and service disruptions.
 
-A data-driven transport analytics platform for monitoring, analysing and forecasting public transport demand across London.
+![London Transport Intelligence Platform Dashboard](screenshots/dashboard.png)
 
+---
 
+## 📌 Project Overview
 
-The project combines \*\*live Transport for London (TfL) data\*\*, historical transport datasets, \*\*PostgreSQL\*\*, machine learning and an interactive \*\*Streamlit dashboard\*\* to provide insights into network performance, passenger demand, station activity and service disruptions.
+London's public transport network generates large volumes of passenger and operational data. This project brings multiple data sources together into a single analytical platform covering:
 
+- London Underground
+- London Buses
+- Elizabeth line
+- London Overground
+- DLR
 
+The project demonstrates a complete workflow from **data collection and engineering to SQL analytics, machine learning, visualisation and application development**.
 
-\## 📌 Project Overview
+---
 
+## ✨ Key Features
 
+### 🚦 Live Network Monitoring
 
-London's public transport network generates large volumes of operational and passenger-demand data. This project brings multiple transport datasets together into a single analytical platform.
+Live operational information is retrieved through the TfL API, including:
 
+- Line status
+- Service disruptions
+- Live bus arrivals
+- Live rail arrivals
+- Lift disruptions
+- Station and stop information
 
+A separate Python data collector retrieves operational snapshots and stores them in PostgreSQL for analysis and dashboard use.
 
-The platform currently covers:
+### 🚌 Live Bus Intelligence
 
+Users can search for London bus stops and view:
 
+- Upcoming buses
+- Route numbers
+- Expected arrival times
+- Destinations
+- Vehicle information
+- Stop locations
+- Arrival patterns
 
-\- London Underground
-
-\- London Buses
-
-\- Elizabeth line
-
-\- London Overground
-
-\- DLR
-
-
-
-It combines historical analysis with live operational information and machine-learning-based demand forecasting.
-
-
-
-\## ✨ Key Features
-
-
-
-\### 🚦 Live Network Monitoring
-
-
-
-The platform retrieves current TfL operational information, including:
-
-
-
-\- Line status
-
-\- Service disruptions
-
-\- Live bus arrivals
-
-\- Live rail arrivals
-
-\- Lift disruptions
-
-\- Station and stop information
-
-
-
-A separate Python data collector can retrieve live TfL information and store snapshots in PostgreSQL for subsequent analysis.
-
-
-
-\### 🚌 Live Bus Intelligence
-
-
-
-Users can search for a London bus stop and view:
-
-
-
-\- Upcoming buses
-
-\- Route numbers
-
-\- Expected arrival times
-
-\- Destinations
-
-\- Vehicle information
-
-\- Stop location
-
-\- Arrival patterns
-
-
-
-\### 🚉 Station Intelligence
-
-
+### 🚉 Station Intelligence
 
 The station interface provides:
 
+- Station location
+- Transport mode
+- Active lines
+- Live arrivals
+- Destinations
+- Vehicle information
+- Arrival-time visualisations
 
+### ♿ Lift Disruption Monitoring
 
-\- Station location
+Accessibility information includes:
 
-\- Transport mode
+- Affected stations
+- Disrupted lifts
+- Current disruption messages
+- Station-level disruption summaries
+- Accessibility insights
 
-\- Active lines
-
-\- Live arrivals
-
-\- Destinations
-
-\- Vehicle information
-
-\- Arrival-time visualisation
-
-
-
-\### ♿ Lift Disruption Monitoring
-
-
-
-Accessibility information is presented through:
-
-
-
-\- Affected stations
-
-\- Disrupted lifts
-
-\- Current disruption messages
-
-\- Station-level disruption summaries
-
-\- Accessibility insights
-
-
-
-\### 📊 Historical Network Analytics
-
-
+### 📊 Historical Network Analytics
 
 Historical TfL data is used to analyse:
 
+- Tube and bus demand
+- Daily passenger journeys
+- Long-term demand trends
+- Station entry and exit activity
+- Weekday and weekend behaviour
+- Peak travel patterns
+- Station demand profiles
 
+The historical journey dataset contains **2,798 daily observations covering 2019 to August 2026**.
 
-\- Tube and bus demand
+---
 
-\- Daily passenger journeys
+## 🤖 Machine Learning Demand Forecasting
 
-\- Long-term demand trends
-
-\- Station entry and exit activity
-
-\- Weekday and weekend behaviour
-
-\- Peak travel patterns
-
-\- Station demand profiles
-
-
-
-The historical journey dataset covers \*\*2,798 days from 2019 to August 2026\*\*.
-
-
-
-\## 🤖 Machine Learning Demand Forecasting
-
-
-
-Several forecasting approaches were evaluated for predicting total daily network demand.
-
-
+Several approaches were evaluated for predicting total daily passenger demand.
 
 | Model | MAE | RMSE | R² |
-
 |---|---:|---:|---:|
-
 | 7-Day Seasonal Baseline | 446,718 | 757,960 | 0.5955 |
-
 | Linear Regression | 395,691 | 598,336 | 0.7480 |
-
 | Random Forest | 227,872 | 362,910 | 0.9073 |
-
 | LightGBM | 222,110 | 348,128 | 0.9147 |
+| **XGBoost** | **208,955** | **335,575** | **0.9207** |
 
-| \*\*XGBoost\*\* | \*\*208,955\*\* | \*\*335,575\*\* | \*\*0.9207\*\* |
+**XGBoost achieved the strongest predictive performance with an R² of 0.9207.**
 
+The forecasting model uses calendar, lag and rolling-demand features:
 
+- Day of week
+- Day of year
+- Week of year
+- Month
+- Year
+- Weekend indicator
+- 1-day lag
+- 7-day lag
+- 14-day lag
+- 28-day lag
+- 7-day rolling mean
+- 28-day rolling mean
 
-\*\*XGBoost achieved the strongest predictive performance with an R² of 0.9207.\*\*
+The trained XGBoost model is integrated into the Streamlit application, allowing users to generate recursive future demand forecasts for a selected forecast horizon.
 
+---
 
-
-The forecasting model uses calendar, lag and rolling-demand features, including:
-
-
-
-\- Day of week
-
-\- Day of year
-
-\- Week of year
-
-\- Month and year
-
-\- Weekend indicator
-
-\- 1-day lag
-
-\- 7-day lag
-
-\- 14-day lag
-
-\- 28-day lag
-
-\- 7-day rolling mean
-
-\- 28-day rolling mean
-
-
-
-The Streamlit application supports recursive future demand forecasts for a user-selected forecast horizon.
-
-
-
-\## 🏗️ Platform Architecture
-
-
+## 🏗️ Platform Architecture
 
 ```text
-
-Historical TfL Data                 Live TfL API
-
-&#x20;      │                                 │
-
-&#x20;      └──────────────┬──────────────────┘
-
-&#x20;                     │
-
-&#x20;                Python ETL
-
-&#x20;                     │
-
-&#x20;                     ▼
-
-&#x20;                PostgreSQL
-
-&#x20;                     │
-
-&#x20;             ┌───────┴────────┐
-
-&#x20;             │                │
-
-&#x20;             ▼                ▼
-
-&#x20;      Historical Analysis   Live Analytics
-
-&#x20;             │                │
-
-&#x20;             └───────┬────────┘
-
-&#x20;                     │
-
-&#x20;                     ▼
-
-&#x20;            Machine Learning
-
-&#x20;                     │
-
-&#x20;                     ▼
-
-&#x20;            Streamlit Dashboard
-
+Historical TfL Data                     Live TfL API
+        │                                     │
+        └─────────────────┬───────────────────┘
+                          │
+                      Python ETL
+                          │
+                          ▼
+                     PostgreSQL
+                          │
+                 ┌────────┴────────┐
+                 │                 │
+                 ▼                 ▼
+       Historical Analytics   Live Analytics
+                 │                 │
+                 └────────┬────────┘
+                          │
+                          ▼
+                  Machine Learning
+                          │
+                          ▼
+                 Streamlit Platform
 ```
 
+The overall workflow can be summarised as:
 
+**TfL Data → Python ETL → PostgreSQL → SQL Analytics → Machine Learning → Streamlit / Power BI**
 
-\## 🛠️ Technology Stack
+---
 
+## 🛠️ Technology Stack
 
+### Programming & Data Processing
+- Python
+- Pandas
+- NumPy
 
-\*\*Programming \& Data Processing\*\*
+### Machine Learning
+- XGBoost
+- LightGBM
+- Random Forest
+- Linear Regression
+- Scikit-learn
 
-\- Python
+### Database
+- PostgreSQL
+- SQL
 
-\- Pandas
+### Data Visualisation
+- Streamlit
+- Plotly
+- Power BI
 
-\- NumPy
+### Data Engineering
+- TfL Unified API
+- REST APIs
+- Python ETL pipelines
 
+### Development & Version Control
+- Jupyter Notebook
+- Git
+- GitHub
 
+---
 
-\*\*Machine Learning\*\*
+## 🗄️ Data Sources
 
-\- XGBoost
+The project uses publicly available historical transport datasets and live operational data from **Transport for London (TfL)**.
 
-\- LightGBM
+### Historical Data
 
-\- Random Forest
+- Journey demand data
+- Station footfall data
+- NUMBAT station demand profiles
+- PTAL data
+- Annualised station statistics
 
-\- Linear Regression
+### Live Data
 
-\- Scikit-learn
+- TfL line status
+- Bus arrivals
+- Rail arrivals
+- Lift disruptions
+- Station and stop information
 
+Large raw datasets and local database files are intentionally excluded from the GitHub repository.
 
+---
 
-\*\*Database\*\*
-
-\- PostgreSQL
-
-\- SQL
-
-
-
-\*\*Data Visualisation\*\*
-
-\- Streamlit
-
-\- Plotly
-
-\- Power BI
-
-
-
-\*\*Data Engineering\*\*
-
-\- TfL Unified API
-
-\- REST APIs
-
-\- Python ETL pipelines
-
-
-
-\*\*Development\*\*
-
-\- Jupyter Notebook
-
-\- Git
-
-\- GitHub
-
-
-
-\## 🗄️ Data Sources
-
-
-
-The project uses publicly available transport datasets and live API data from \*\*Transport for London (TfL)\*\*.
-
-
-
-Historical data includes:
-
-
-
-\- Journey demand data
-
-\- Station footfall
-
-\- NUMBAT station demand profiles
-
-\- PTAL data
-
-\- Annualised station statistics
-
-
-
-Live data includes:
-
-
-
-\- TfL line status
-
-\- Bus arrivals
-
-\- Rail arrivals
-
-\- Lift disruptions
-
-\- Station and stop information
-
-
-
-\## 📂 Repository Structure
-
-
+## 📂 Repository Structure
 
 ```text
-
 london-transport-intelligence-platform/
-
 │
-
 ├── app/
-
 │   └── app.py
-
 │
-
 ├── data/
-
 │   └── processed/
-
 │
-
 ├── image/
-
 │   └── bannerimage.png
-
 │
-
 ├── models/
-
-│   └── xgboost\_network\_demand\_model.pkl
-
+│   └── xgboost_network_demand_model.pkl
 │
-
-├── collect\_live\_data.py
-
+├── notebooks/
+│   └── TfL_Transport_Analysis.ipynb
+│
+├── powerbi/
+│   └── tfl_intiligence.pbix
+│
+├── screenshots/
+│   └── dashboard.png
+│
+├── collect_live_data.py
 ├── postgres.sql
-
+├── requirements.txt
 ├── README.md
-
 └── .gitignore
-
 ```
 
+---
 
+## 📊 Power BI Analysis
 
-Large raw datasets and local database files are intentionally excluded from the repository.
+The repository includes a Power BI report containing interactive analysis of London transport data.
 
+The report focuses on:
 
+- Network-level passenger demand
+- Station intelligence
+- Temporal travel patterns
+- Peak-period analysis
+- Tube and bus demand comparisons
 
-\## ⚙️ Running the Application
+Power BI file:
 
+```text
+powerbi/tfl_intiligence.pbix
+```
 
+---
 
-\### 1. Clone the repository
+## 📓 Jupyter Analysis
 
+The Jupyter Notebook contains the analytical and machine learning workflow used during project development.
 
+It includes:
+
+- Data exploration
+- Data preprocessing
+- Feature engineering
+- Time-based analysis
+- Model development
+- Model comparison
+- Demand forecasting evaluation
+
+Notebook:
+
+```text
+notebooks/TfL_Transport_Analysis.ipynb
+```
+
+---
+
+## ⚙️ Running the Application
+
+### 1. Clone the Repository
 
 ```bash
-
 git clone https://github.com/poudelkeshav/london-transport-intelligence-platform.git
-
 cd london-transport-intelligence-platform
-
 ```
 
-
-
-\### 2. Install dependencies
-
-
+### 2. Install Dependencies
 
 ```bash
-
 pip install -r requirements.txt
-
 ```
 
-
-
-\### 3. Configure PostgreSQL
-
-
+### 3. Configure PostgreSQL
 
 Create a PostgreSQL database and use the provided SQL file where appropriate:
 
-
-
 ```text
-
 postgres.sql
-
 ```
 
-
-
-Database credentials should be stored as environment variables and should \*\*never be committed to GitHub\*\*.
-
-
+Database credentials should be stored securely as environment variables and should **never be committed to GitHub**.
 
 For example:
 
-
-
 ```text
-
-DB\_PASSWORD=your\_database\_password
-
+DB_PASSWORD=your_database_password
 ```
 
-
-
-\### 4. Run the Streamlit application
-
-
+### 4. Run the Streamlit Application
 
 ```bash
-
 streamlit run app/app.py
-
 ```
 
+---
 
-
-\## 📡 Live Data Collection
-
-
+## 📡 Live Data Collection
 
 Live TfL operational snapshots can be collected using:
 
-
-
 ```bash
-
-python collect\_live\_data.py
-
+python collect_live_data.py
 ```
 
+The collector retrieves current operational information from the TfL API and stores the results in PostgreSQL.
 
+The collection script can be run manually or scheduled externally depending on the deployment environment.
 
-The collector retrieves current operational information and stores it in PostgreSQL for use by the dashboard.
+---
 
+## 📈 Streamlit Modules
 
+The interactive application contains eight main modules:
 
-\## 📈 Dashboard Modules
+1. 🏠 Dashboard
+2. 🚦 Line Status
+3. 🚌 Bus Arrivals
+4. 📍 Station Information
+5. ♿ Lift Disruptions
+6. 📈 Demand Forecasting
+7. 📊 Network Analytics
+8. ℹ️ About
 
+These modules combine live operational information, historical analytics and machine-learning insights within one interface.
 
+---
 
-The Streamlit application contains dedicated interfaces for:
+## 🎯 Project Purpose
 
+The purpose of this project was to build more than a standalone machine learning model.
 
+It demonstrates an end-to-end data workflow:
 
-1\. Dashboard
+**API Ingestion → Data Engineering → PostgreSQL → SQL Analytics → Machine Learning → Interactive Visualisation**
 
-2\. Line Status
+The project demonstrates practical experience across **data analytics, data science, machine learning and data engineering**, while applying these skills to a real-world London transport use case.
 
-3\. Bus Arrivals
+---
 
-4\. Station Information
+## 🔮 Future Development
 
-5\. Lift Disruptions
+Potential future extensions include:
 
-6\. Demand Forecasting
+- Cloud deployment
+- Automated cloud-based data collection
+- FastAPI service layer
+- Docker containerisation
+- Weather and event-data integration
+- Additional anomaly detection
+- Spatial demand forecasting
+- Historical disruption modelling when sufficient labelled data becomes available
 
-7\. Network Analytics
+---
 
-8\. About
+## 👤 Author
 
-
-
-\## 🎯 Project Purpose
-
-
-
-The project demonstrates an end-to-end data workflow rather than only a standalone machine-learning model.
-
-
-
-It brings together:
-
-
-
-\*\*API ingestion → data engineering → SQL → historical analytics → machine learning → live monitoring → interactive visualisation\*\*
-
-
-
-This architecture demonstrates how transport data can be transformed into practical information for understanding demand patterns and network conditions.
-
-
-
-\## 🔮 Future Development
-
-
-
-Potential extensions include:
-
-
-
-\- Automated cloud-based live data collection
-
-\- FastAPI service layer
-
-\- Docker containerisation
-
-\- Cloud deployment
-
-\- Additional anomaly detection
-
-\- Weather and event-data integration
-
-\- Spatial demand forecasting
-
-\- Historical disruption modelling when sufficient labelled data becomes available
-
-
-
-\## 👤 Author
-
-
-
-\*\*Keshav Poudel\*\*
-
-
+**Keshav Poudel**
 
 Data Science | Data Analytics | Machine Learning | Python | SQL | Power BI
 
+GitHub: [poudelkeshav](https://github.com/poudelkeshav)
 
+Project Repository: [London Transport Intelligence Platform](https://github.com/poudelkeshav/london-transport-intelligence-platform)
 
-GitHub: \[poudelkeshav](https://github.com/poudelkeshav)
+---
 
-
-
-\---
-
-
-
-\*Built as a personal data science and transport analytics project focused on London's public transport network.\*
-
+*Personal data science and transport analytics project focused on building an end-to-end intelligence platform for London's public transport network.*
